@@ -1,4 +1,6 @@
+pub mod drives;
 pub mod engine;
+pub mod nav;
 pub mod queue;
 
 #[cfg(test)]
