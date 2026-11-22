@@ -349,24 +349,7 @@ fn is_dir_link(_file_type: &fs::FileType) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    /// Temporary folder that removes itself when dropped, even if the test fails.
-    struct TestDir(PathBuf);
-
-    impl TestDir {
-        fn new(name: &str) -> Self {
-            let path = std::env::temp_dir().join(format!("fd-deleter-{}-{name}", std::process::id()));
-            let _ = fs::remove_dir_all(&path);
-            fs::create_dir_all(&path).unwrap();
-            Self(path)
-        }
-    }
-
-    impl Drop for TestDir {
-        fn drop(&mut self) {
-            let _ = fs::remove_dir_all(&self.0);
-        }
-    }
+    use crate::test_support::TestDir;
 
     #[derive(Debug, Default, PartialEq, Eq)]
     struct Totals {
