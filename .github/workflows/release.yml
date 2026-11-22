@@ -1,0 +1,57 @@
+name: Release
+
+# Pushing a tag like v0.1.0 builds the Windows installer and attaches it to a draft GitHub Release.
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that the tag matches the app version
+        shell: bash
+        run: |
+          app_version=$(node -p "require('./src-tauri/tauri.conf.json').version")
+          if [ "v$app_version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match the app version v$app_version in tauri.conf.json"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Run Rust tests
+        run: cargo test --manifest-path src-tauri/Cargo.toml --lib
+
+      - name: Build and publish draft release
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Fast Delete ${{ github.ref_name }}"
+          releaseBody: |
+            Download **Fast.Delete_*_x64-setup.exe** below and run it. No administrator rights are needed.
+
+            The installer is not code-signed yet, so Windows SmartScreen may warn you: choose **More info → Run anyway**.
+          generateReleaseNotes: true
+          releaseDraft: true
+          prerelease: false
