@@ -1,0 +1,413 @@
+.panel {
+  width: 392px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--divider);
+  background: var(--layer-alt);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.panelHeader {
+  padding: 18px 20px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.count {
+  font-size: 12px;
+  padding: 0 8px;
+  border-radius: 10px;
+  background: var(--control);
+  color: var(--text-2);
+}
+
+.flex {
+  flex: 1;
+}
+
+.items {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 0 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty {
+  margin: 48px 12px;
+  text-align: center;
+  color: var(--text-3);
+}
+
+.card {
+  padding: 12px 12px 10px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-stroke);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardName {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 0 8px;
+  border-radius: 10px;
+  color: var(--text-2);
+  background: var(--control);
+}
+
+.status[data-tone="muted"] {
+  color: var(--text-3);
+}
+
+.status[data-tone="accent"] {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.status[data-tone="ok"] {
+  color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.status[data-tone="warn"] {
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+
+.status[data-tone="critical"] {
+  color: var(--critical);
+  background: var(--critical-soft);
+}
+
+.cardPath {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: text;
+}
+
+.cardSize {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.sizeValue {
+  font-weight: 600;
+}
+
+.sizeDetail,
+.cardNote {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.cardError {
+  font-size: 12px;
+  color: var(--critical);
+}
+
+.barTrack {
+  position: relative;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 150ms linear;
+}
+
+.barFill[data-tone="ok"] {
+  background: var(--ok);
+}
+
+.barFill[data-tone="warn"] {
+  background: var(--warn);
+}
+
+.barFill[data-tone="muted"] {
+  background: var(--text-3);
+}
+
+/* Unknown total: a short segment slides across instead of a percentage. */
+.barTrack[data-indeterminate="true"] .barFill {
+  width: 30%;
+  animation: fd-indeterminate 1.2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes fd-indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}
+
+.linkButton {
+  align-self: flex-start;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-left: -6px;
+  border-radius: var(--radius-control);
+  color: var(--accent);
+}
+
+.linkButton[data-tone="warn"] {
+  color: var(--warn);
+}
+
+.errorList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow: auto;
+  padding: 8px 10px;
+  border-radius: var(--radius-control);
+  background: var(--control);
+}
+
+.errorRow {
+  font-size: 12px;
+  line-height: 16px;
+  user-select: text;
+}
+
+.errorPath {
+  color: var(--text);
+  word-break: break-all;
+}
+
+.errorMessage {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.iconButton {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-control);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+}
+
+.footer {
+  padding: 12px 20px 20px;
+  border-top: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+}
+
+.banner {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: var(--radius-card);
+  background: var(--ok-soft);
+}
+
+.banner[data-tone="warn"] {
+  background: var(--warn-soft);
+}
+
+.banner svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.bannerTitle {
+  font-weight: 600;
+}
+
+.bannerDetail {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.summary {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.disclosure {
+  align-self: flex-start;
+  font-size: 12px;
+  color: var(--text-2);
+  padding: 2px 6px;
+  margin-left: -6px;
+  border-radius: var(--radius-control);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.chevron {
+  transition: transform 180ms var(--ease-out);
+}
+
+.chevron[data-open="true"] {
+  transform: rotate(90deg);
+}
+
+.advanced {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.advancedRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-2);
+}
+
+.muted {
+  color: var(--text-3);
+}
+
+.segmented {
+  display: grid;
+  gap: 2px;
+  padding: 2px;
+  border-radius: var(--radius-card);
+  background: var(--control);
+}
+
+.segment {
+  height: 28px;
+  border-radius: var(--radius-control);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.segment[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ghostButton {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-control);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.secondaryButton {
+  flex: 1;
+  height: 36px;
+  border-radius: var(--radius-control);
+  background: var(--control);
+  border: 1px solid var(--control-stroke);
+}
+
+.dangerButton {
+  flex: 1.4;
+  height: 36px;
+  border-radius: var(--radius-control);
+  background: var(--danger-fill);
+  color: var(--on-danger);
+  font-weight: 600;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ghostButton:hover,
+  .iconButton:hover,
+  .linkButton:hover,
+  .disclosure:hover,
+  .segment:hover:not([aria-pressed="true"]) {
+    background: var(--subtle-hover);
+  }
+
+  .secondaryButton:hover:not(:disabled) {
+    background: var(--control-hover);
+  }
+
+  .dangerButton:hover:not(:disabled) {
+    background: var(--danger-fill-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barTrack[data-indeterminate="true"] .barFill {
+    animation: none;
+    width: 100%;
+    opacity: 0.5;
+  }
+
+  .barFill,
+  .chevron {
+    transition: none;
+  }
+}

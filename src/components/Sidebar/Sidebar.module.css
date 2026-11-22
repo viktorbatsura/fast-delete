@@ -1,0 +1,113 @@
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  padding: 12px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: auto;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 4px 12px 8px;
+}
+
+.drive {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: var(--radius-card);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.drive[data-selected="true"] {
+  background: var(--subtle-selected);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .drive:hover {
+    background: var(--subtle-hover);
+  }
+}
+
+.indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 16px;
+  margin-top: -8px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transition: transform 200ms var(--ease-out);
+}
+
+.drive[data-selected="true"] .indicator {
+  transform: scaleY(1);
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.used {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.meta {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-3);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.dropHint {
+  border: 1px dashed var(--track-off);
+  border-radius: var(--radius-layer);
+  padding: 14px;
+  display: flex;
+  gap: 10px;
+  color: var(--text-3);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.dropHint svg {
+  flex-shrink: 0;
+}

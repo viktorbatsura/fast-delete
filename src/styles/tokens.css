@@ -1,0 +1,102 @@
+/* Design tokens. Values follow the Windows 11 (Fluent) palette for dark and light themes. */
+
+:root {
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --radius-control: 4px;
+  --radius-card: 6px;
+  --radius-layer: 8px;
+  --danger-fill: #c42b1c;
+  --danger-fill-hover: #d13b2b;
+  --on-danger: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --solid-bg: #202020;
+  --layer: #272727;
+  --layer-alt: #2b2b2b;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-stroke: rgba(255, 255, 255, 0.07);
+  --subtle-hover: rgba(255, 255, 255, 0.06);
+  --subtle-selected: rgba(255, 255, 255, 0.08);
+  --control: rgba(255, 255, 255, 0.07);
+  --control-hover: rgba(255, 255, 255, 0.11);
+  --control-stroke: rgba(255, 255, 255, 0.08);
+  --input-underline: rgba(255, 255, 255, 0.54);
+  --divider: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --text-2: rgba(255, 255, 255, 0.79);
+  --text-3: rgba(255, 255, 255, 0.6);
+  --accent: #60cdff;
+  --on-accent: #000000;
+  --accent-soft: rgba(96, 205, 255, 0.14);
+  --ok: #6ccb5f;
+  --ok-soft: rgba(108, 203, 95, 0.14);
+  --warn: #fce100;
+  --warn-soft: rgba(252, 225, 0, 0.12);
+  --critical: #ff99a4;
+  --critical-soft: rgba(196, 43, 28, 0.2);
+  --critical-stroke: rgba(255, 153, 164, 0.45);
+  --track: rgba(255, 255, 255, 0.12);
+  --track-off: rgba(255, 255, 255, 0.24);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --dialog: #2b2b2b;
+  --dialog-footer: #202020;
+  --popover: #2c2c2c;
+  --shadow-popover: 0 16px 32px rgba(0, 0, 0, 0.45);
+  --shadow-dialog: 0 32px 64px rgba(0, 0, 0, 0.5);
+  --folder: #e8b84a;
+  --caption-glyph: #ffffff;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --solid-bg: #f3f3f3;
+  --layer: #fbfbfb;
+  --layer-alt: #ffffff;
+  --card: #ffffff;
+  --card-stroke: rgba(0, 0, 0, 0.07);
+  --subtle-hover: rgba(0, 0, 0, 0.04);
+  --subtle-selected: rgba(0, 0, 0, 0.06);
+  --control: #ffffff;
+  --control-hover: #f6f6f6;
+  --control-stroke: rgba(0, 0, 0, 0.1);
+  --input-underline: rgba(0, 0, 0, 0.45);
+  --divider: rgba(0, 0, 0, 0.08);
+  --text: #1a1a1a;
+  --text-2: rgba(0, 0, 0, 0.7);
+  --text-3: rgba(0, 0, 0, 0.6);
+  --accent: #005fb8;
+  --on-accent: #ffffff;
+  --accent-soft: #e5f1fb;
+  --ok: #0f7b0f;
+  --ok-soft: #dff6dd;
+  --warn: #9d5d00;
+  --warn-soft: #fff4ce;
+  --critical: #a1261a;
+  --critical-soft: #fde7e4;
+  --critical-stroke: #f1b2aa;
+  --track: rgba(0, 0, 0, 0.08);
+  --track-off: rgba(0, 0, 0, 0.3);
+  --scrim: rgba(0, 0, 0, 0.3);
+  --dialog: #ffffff;
+  --dialog-footer: #f3f3f3;
+  --popover: #ffffff;
+  --shadow-popover: 0 16px 32px rgba(0, 0, 0, 0.14);
+  --shadow-dialog: 0 32px 64px rgba(0, 0, 0, 0.22);
+  --folder: #f2c55c;
+  --caption-glyph: #1a1a1a;
+}
+
+/* With Mica the window background is the material itself, so layers become translucent. */
+:root[data-theme="dark"][data-mica="true"] {
+  --layer: rgba(58, 58, 58, 0.3);
+  --layer-alt: rgba(255, 255, 255, 0.03);
+}
+
+:root[data-theme="light"][data-mica="true"] {
+  --layer: rgba(255, 255, 255, 0.5);
+  --layer-alt: rgba(255, 255, 255, 0.55);
+}

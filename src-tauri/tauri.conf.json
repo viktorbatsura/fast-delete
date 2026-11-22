@@ -18,7 +18,13 @@
         "height": 780,
         "minWidth": 920,
         "minHeight": 600,
-        "dragDropEnabled": true
+        "dragDropEnabled": true,
+        "decorations": false,
+        "transparent": true,
+        "shadow": true,
+        "windowEffects": {
+          "effects": ["mica"]
+        }
       }
     ],
     "security": {

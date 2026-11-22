@@ -1,0 +1,273 @@
+.navigator {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 24px 12px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 20px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.crumb {
+  display: inline-flex;
+  align-items: center;
+}
+
+.crumbButton {
+  padding: 0 4px;
+  border-radius: var(--radius-control);
+}
+
+.crumbSeparator {
+  color: var(--text-3);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: -6px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iconButton {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: var(--radius-control);
+  display: grid;
+  place-items: center;
+  color: var(--text-2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crumbButton:hover,
+  .iconButton:hover:not(:disabled),
+  .addButton:hover:not(:disabled) {
+    background: var(--subtle-hover);
+  }
+
+  .crumbButton:hover {
+    color: var(--text);
+  }
+
+  .row:hover {
+    background: var(--subtle-hover);
+  }
+
+  .secondaryButton:hover:not(:disabled) {
+    background: var(--control-hover);
+  }
+
+  .suggestion:hover {
+    background: var(--subtle-hover);
+  }
+}
+
+.pathRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pathField {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.pathInput {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--control-stroke);
+  border-bottom-color: var(--input-underline);
+  background: var(--control);
+  outline: none;
+}
+
+.pathInput:focus {
+  border-bottom: 2px solid var(--accent);
+}
+
+.pathInput::placeholder {
+  color: var(--text-3);
+}
+
+.suggestions {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  max-height: 280px;
+  overflow: auto;
+  border-radius: var(--radius-layer);
+  background: var(--popover);
+  border: 1px solid var(--card-stroke);
+  box-shadow: var(--shadow-popover);
+  transform-origin: top center;
+  animation: fd-rise 180ms var(--ease-out);
+}
+
+.suggestion {
+  padding: 6px 10px;
+  border-radius: var(--radius-control);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestion[data-active="true"] {
+  background: var(--subtle-selected);
+}
+
+.secondaryButton {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--radius-control);
+  background: var(--control);
+  border: 1px solid var(--control-stroke);
+  white-space: nowrap;
+}
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-3);
+  padding: 0 12px 6px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.list {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 4px 0;
+  outline: none;
+  transition: opacity 150ms ease;
+}
+
+.list:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--accent);
+  border-radius: var(--radius-control);
+}
+
+.list[data-loading="true"] {
+  opacity: 0.55;
+}
+
+.row {
+  height: 40px;
+  padding: 0 8px 0 12px;
+  border-radius: var(--radius-control);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.row[data-selected="true"] {
+  background: var(--subtle-selected);
+}
+
+.row[data-hidden="true"] {
+  opacity: 0.62;
+}
+
+.row svg {
+  flex-shrink: 0;
+}
+
+.rowName {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rowDetail {
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.rowSpacer {
+  flex: 1;
+}
+
+.inQueue {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ok);
+  padding-right: 10px;
+}
+
+.addButton {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-control);
+  font-size: 12px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.state {
+  margin: 40px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-2);
+}
+
+.stateDetail {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.more {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.keyHint {
+  padding-top: 8px;
+  font-size: 12px;
+  color: var(--text-3);
+  border-top: 1px solid var(--divider);
+}
