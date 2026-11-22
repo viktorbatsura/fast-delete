@@ -32,6 +32,13 @@ body,
   color: var(--muted);
 }
 
+.hello .drives {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  line-height: 1.8;
+}
+
 .hello .error {
   color: var(--danger);
 }

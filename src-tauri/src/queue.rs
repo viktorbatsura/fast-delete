@@ -129,6 +129,8 @@ impl fmt::Display for QueueError {
 
 impl std::error::Error for QueueError {}
 
+/// Cheap to clone: all clones share the same queue.
+#[derive(Clone)]
 pub struct JobQueue {
     shared: Arc<Shared>,
 }

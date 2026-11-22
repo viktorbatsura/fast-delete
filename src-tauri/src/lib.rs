@@ -1,3 +1,4 @@
+mod commands;
 pub mod drives;
 pub mod engine;
 pub mod nav;
@@ -6,30 +7,25 @@ pub mod queue;
 #[cfg(test)]
 mod test_support;
 
-use serde::Serialize;
-
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-struct SystemInfo {
-    app_version: &'static str,
-    logical_cpus: usize,
-}
-
-#[tauri::command]
-fn system_info() -> SystemInfo {
-    let logical_cpus = std::thread::available_parallelism()
-        .map(|n| n.get())
-        .unwrap_or(1);
-
-    SystemInfo {
-        app_version: env!("CARGO_PKG_VERSION"),
-        logical_cpus,
-    }
-}
-
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![system_info])
+        .setup(|app| {
+            commands::init(app);
+            Ok(())
+        })
+        .invoke_handler(tauri::generate_handler![
+            commands::system_info,
+            commands::list_drives,
+            commands::list_dir,
+            commands::suggest_paths,
+            commands::queue_snapshot,
+            commands::queue_add,
+            commands::queue_remove,
+            commands::queue_set_keep_root,
+            commands::queue_clear_finished,
+            commands::queue_start,
+            commands::queue_cancel,
+        ])
         .run(tauri::generate_context!())
         .expect("failed to start Fast Delete");
 }
