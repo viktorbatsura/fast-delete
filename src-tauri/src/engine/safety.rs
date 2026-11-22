@@ -4,6 +4,8 @@ use std::fmt;
 use std::io;
 use std::path::{Path, PathBuf};
 
+use super::fs_ext::is_dir_link;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum SafetyError {
     NotAbsolute,
@@ -116,7 +118,7 @@ impl SafetyRules {
         let normalized = self.check_rules(path)?;
 
         let meta = std::fs::symlink_metadata(&normalized).map_err(io_error)?;
-        if !(meta.is_dir() || is_dir_link(&meta)) {
+        if !(meta.is_dir() || is_dir_link(&meta.file_type())) {
             return Err(SafetyError::NotADirectory);
         }
 
@@ -164,17 +166,6 @@ fn comparable(path: &Path) -> PathBuf {
     };
 
     PathBuf::from(plain)
-}
-
-#[cfg(windows)]
-fn is_dir_link(meta: &std::fs::Metadata) -> bool {
-    use std::os::windows::fs::FileTypeExt;
-    meta.file_type().is_symlink_dir()
-}
-
-#[cfg(not(windows))]
-fn is_dir_link(_meta: &std::fs::Metadata) -> bool {
-    false
 }
 
 #[cfg(all(test, windows))]

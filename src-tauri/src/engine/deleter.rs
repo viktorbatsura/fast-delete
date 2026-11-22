@@ -13,6 +13,7 @@ use std::time::Duration;
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
 
+use super::fs_ext::is_dir_link;
 use super::progress::Progress;
 
 /// Deep trees recurse deeply; the default 2 MB stack of a worker thread is not always enough.
@@ -333,17 +334,6 @@ fn clear_readonly(path: &Path) -> bool {
     #[allow(clippy::permissions_set_readonly_false)]
     permissions.set_readonly(false);
     fs::set_permissions(path, permissions).is_ok()
-}
-
-#[cfg(windows)]
-fn is_dir_link(file_type: &fs::FileType) -> bool {
-    use std::os::windows::fs::FileTypeExt;
-    file_type.is_symlink_dir()
-}
-
-#[cfg(not(windows))]
-fn is_dir_link(_file_type: &fs::FileType) -> bool {
-    false
 }
 
 #[cfg(test)]
