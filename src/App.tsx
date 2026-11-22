@@ -17,6 +17,7 @@ import { logDev, pathName } from "./utils/format";
 import styles from "./App.module.css";
 
 const FALLBACK_THREADS = 16;
+const DRIVE_POLL_MS = 2000;
 
 export default function App() {
   const { settings, update } = useSettings();
@@ -68,16 +69,41 @@ export default function App() {
   const dragging = useDragDrop(addPaths);
 
   // After a run the free space changed and deleted folders are gone: refresh what is on screen.
-  const { refreshDrives, open, path } = nav;
+  const { refreshDrives, open, path, refresh } = nav;
+  const running = queue.snapshot.running;
   const wasRunning = useRef(false);
   useEffect(() => {
-    const running = queue.snapshot.running;
     if (wasRunning.current && !running) {
       refreshDrives();
-      if (path) open(path);
+      if (path) open(path, true);
     }
     wasRunning.current = running;
-  }, [queue.snapshot.running, refreshDrives, open, path]);
+  }, [running, refreshDrives, open, path]);
+
+  // While deleting, free space grows: update the drive bars live.
+  useEffect(() => {
+    if (!running) return;
+    const timer = window.setInterval(refreshDrives, DRIVE_POLL_MS);
+    return () => window.clearInterval(timer);
+  }, [running, refreshDrives]);
+
+  // Returning from Explorer or another app: something may have changed on disk.
+  useEffect(() => {
+    const onFocus = () => refreshDrives();
+    window.addEventListener("focus", onFocus);
+    return () => window.removeEventListener("focus", onFocus);
+  }, [refreshDrives]);
+
+  // F5 refreshes the app instead of reloading the web page.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "F5") return;
+      event.preventDefault();
+      refresh();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [refresh]);
 
   const runnable = queue.snapshot.items.filter(isRunnable);
 
@@ -90,7 +116,13 @@ export default function App() {
     <div className={styles.app}>
       <TitleBar />
       <div className={styles.body}>
-        <Sidebar drives={nav.drives} currentPath={nav.path} onOpen={nav.open} />
+        <Sidebar
+          drives={nav.drives}
+          currentPath={nav.path}
+          refreshing={nav.refreshing}
+          onOpen={(drivePath) => nav.open(drivePath)}
+          onRefresh={refresh}
+        />
         <main className={styles.main}>
           <Navigator
             path={nav.path}

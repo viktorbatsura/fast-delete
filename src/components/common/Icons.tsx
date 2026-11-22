@@ -95,6 +95,21 @@ export function ArrowUpIcon(props: IconProps) {
   );
 }
 
+export function RefreshIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" {...base(props)}>
+      <path
+        d="M13 8a5 5 0 11-1.46-3.54M13 2.5v3h-3"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function DropIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 18 18" {...base({ size: 18, ...props })}>

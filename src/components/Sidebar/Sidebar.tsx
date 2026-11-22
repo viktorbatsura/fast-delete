@@ -1,12 +1,14 @@
 import type { DriveInfo } from "../../api/types";
-import { DriveIcon, DropIcon } from "../common/Icons";
+import { DriveIcon, DropIcon, RefreshIcon } from "../common/Icons";
 import { formatBytes } from "../../utils/format";
 import styles from "./Sidebar.module.css";
 
 interface SidebarProps {
   drives: DriveInfo[];
   currentPath: string | null;
+  refreshing: boolean;
   onOpen: (path: string) => void;
+  onRefresh: () => void;
 }
 
 function driveMeta(drive: DriveInfo): string {
@@ -16,12 +18,23 @@ function driveMeta(drive: DriveInfo): string {
   return `${formatBytes(drive.freeBytes)} free of ${formatBytes(drive.totalBytes)}`;
 }
 
-export function Sidebar({ drives, currentPath, onOpen }: SidebarProps) {
+export function Sidebar({ drives, currentPath, refreshing, onOpen, onRefresh }: SidebarProps) {
   const currentLetter = currentPath?.[0]?.toUpperCase();
 
   return (
     <nav className={styles.sidebar} aria-label="Drives">
-      <div className={styles.heading}>Drives</div>
+      <div className={styles.headingRow}>
+        <span className={styles.heading}>Drives</span>
+        <button
+          className={`${styles.refresh} press`}
+          aria-label="Refresh drives and folder (F5)"
+          title="Refresh (F5)"
+          data-refreshing={refreshing}
+          onClick={onRefresh}
+        >
+          <RefreshIcon />
+        </button>
+      </div>
       {drives.map((drive) => {
         const selected = drive.letter === currentLetter;
         const used =
