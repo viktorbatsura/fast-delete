@@ -38,11 +38,13 @@ pub struct DeleteOptions {
 }
 
 impl DeleteOptions {
+    /// One thread per logical CPU. Benchmarks on NVMe show a plateau at 8-16 threads
+    /// and a slight slowdown beyond that (see docs/benchmarks).
     pub fn default_threads() -> usize {
         let cpus = thread::available_parallelism()
             .map(|n| n.get())
             .unwrap_or(4);
-        (cpus * 2).clamp(4, 64)
+        cpus.clamp(4, 32)
     }
 }
 
