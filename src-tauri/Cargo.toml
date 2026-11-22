@@ -2,9 +2,11 @@
 name = "fast-delete"
 version = "0.1.0"
 description = "Fast parallel folder deletion for Windows"
-edition = "2021"
-# std::path::absolute is used for safe path normalization.
-rust-version = "1.79"
+authors = ["Viktor Batsura"]
+license = "MIT"
+repository = "https://github.com/viktorbatsura/fast-delete"
+edition = "2024"
+rust-version = "1.85"
 
 [lib]
 name = "fast_delete_lib"
@@ -14,7 +16,7 @@ crate-type = ["rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = [] }
+tauri = { version = "2.12.6", features = [] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rayon = "1.10"
